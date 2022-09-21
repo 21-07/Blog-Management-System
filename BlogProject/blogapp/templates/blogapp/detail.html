@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load crispy_forms_tags %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>detail</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="https://cdn.pixabay.com/photo/2014/04/18/10/08/blog-327070_640.jpg" height='60' width='70'>
+            <b>Blogs Project</b>
+        </a>
+        <h3 style="color:white">{{user}}</h3>
+        <div>
+             <a href="/index/" style="color:white" class='btn btn-primary'>Blogs</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="/create/" style="color:white" class='btn btn-primary'>create</a>&nbsp;&nbsp;&nbsp;&nbsp;
+             <a href="/logout/" style="color:white" class='btn btn-primary'>logout</a>
+        </div>
+    </nav>
+    <div class="container">
+        <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+            {{form | crispy }}
+        </form>
+                   
+
+           <h2>{{obj.title}}</h2></a>
+           <h4>Blog Posted by <a href="/user/{{obj.user.id}}/">{{obj.user}}</a> on the date {{obj.date_posted}}</h4><br><br>
+           <p>{{obj.body}}</p>
+          {% if obj.blog_image %}
+              <img src="{{obj.blog_image.url}}" height='200' width='200' alt="">
+          {% endif %}
+          <hr>
+    </div>
+          {% if user.id == obj.user.id %}
+            <div style="text-align:center">
+                
+             <a href="/update/{{obj.id}}/" style="color:white" class='btn btn-warning'>edit</a>&nbsp;&nbsp;&nbsp;
+             <a href="/delete/{{obj.id}}/" style="color:white" class='btn btn-danger'>delete</a>&nbsp;&nbsp;&nbsp;
+             
+            </div> 
+          {% endif %}
+        
+
+
+
+</body>
+</html>
